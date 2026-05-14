@@ -1,6 +1,4 @@
 from typing import TypedDict
-from urllib import response
-
 from httpx import Response, QueryParams
 
 from clients.http.gateway.cards.client import CardDict
