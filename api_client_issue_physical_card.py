@@ -11,12 +11,12 @@ create_user_response = user_gateway_http_client.create_user()
 print('Create user response: ', create_user_response)
 
 open_debit_card_account_response = accounts_gateway_http_client.open_debit_card_account(
-    create_user_response['user']['id']
+    create_user_response.user.id
 )
 print('Open debit card account response: ',open_debit_card_account_response)
 
 issue_physical_card_response = cards_gateway_http_client.issue_physical_card(
-    create_user_response['user']['id'],
-    open_debit_card_account_response['account']['id']
+    create_user_response.user.id,
+    open_debit_card_account_response.account.id
 )
 print('Issue physical card response: ', issue_physical_card_response)

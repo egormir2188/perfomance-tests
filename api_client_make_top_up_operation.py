@@ -11,12 +11,12 @@ create_user_response = user_gateway_http_client.create_user()
 print('Create user response: ', create_user_response)
 
 open_debit_card_account_response = accounts_gateway_http_client.open_debit_card_account(
-    create_user_response['user']['id']
+    create_user_response.user.id
 )
 print('Open debit card account response: ', open_debit_card_account_response)
 
 make_top_up_operation_response = operations_gateway_http_client.make_top_up_operation(
-    card_id = open_debit_card_account_response['account']['cards'][0]['id'],
-    account_id = open_debit_card_account_response['account']['id']
+    card_id = open_debit_card_account_response.account.cards[0].id,
+    account_id = open_debit_card_account_response.account.id
 )
 print('Make top up operation response: ', make_top_up_operation_response)

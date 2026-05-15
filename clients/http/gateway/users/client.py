@@ -1,35 +1,11 @@
 import time
 
 from httpx import Response
-from typing import TypedDict
 
 from clients.http.client import HttpClient
 from clients.http.gateway.client import build_gateway_http_client
+from clients.http.gateway.users.schema import CreateUserRequestSchema, GetUserResponseSchema, CreateUserResponseSchema
 
-
-class UserDict(TypedDict):
-    id: str
-    email: str
-    lastName: str
-    firstName: str
-    middleName: str
-    phoneNumber: str
-
-class CreateUserRequestDict(TypedDict):
-    """
-    Структура данных для создания нового пользователя.
-    """
-    email: str
-    lastName: str
-    firstName: str
-    middleName: str
-    phoneNumber: str
-
-class GetUserResponseDict(TypedDict):
-    user: CreateUserRequestDict
-
-class CreateUserResponseDict(TypedDict):
-    user: UserDict
 
 class UsersGatewayHTTPClient(HttpClient):
     """
@@ -45,29 +21,30 @@ class UsersGatewayHTTPClient(HttpClient):
         """
         return self.get(f'/api/v1/users/{user_id}')
 
-    def create_user_api(self, request: CreateUserRequestDict) -> Response:
+    def create_user_api(self, request: CreateUserRequestSchema) -> Response:
         """
         Создание нового пользователя.
 
         :param request: Словарь с данными нового пользователя.
         :return: Ответ от сервера (объект httpx.Response).
         """
-        return self.post('/api/v1/users', json=request)
+        return self.post('/api/v1/users', json=request.model_dump(by_alias=True))
 
-    def get_user(self, user_id: str) -> GetUserResponseDict:
+    def get_user(self, user_id: str) -> GetUserResponseSchema:
         response = self.get_user_api(user_id)
-        return response.json()
+        return GetUserResponseSchema.model_validate_json(response.text)
 
-    def create_user(self) -> CreateUserResponseDict:
-        request = CreateUserRequestDict(
+    def create_user(self) -> CreateUserResponseSchema:
+        request = CreateUserRequestSchema(
             email=f"user.{time.time()}@example.com",
-            lastName="string",
-            firstName="string",
-            middleName="string",
-            phoneNumber="string"
+            last_name="string",
+            first_name="string",
+            middle_name="string",
+            phone_number="string"
         )
         response = self.create_user_api(request)
-        return response.json()
+        return CreateUserResponseSchema.model_validate_json(response.text)
+
 
 def build_user_gateway_http_client() -> UsersGatewayHTTPClient:
     """
