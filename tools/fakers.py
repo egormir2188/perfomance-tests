@@ -93,7 +93,7 @@ class Fake:
         """
         return self.faker.phone_number()
 
-    def float(self, start: int = 1, end: int = 100) -> float:
+    def float_num(self, start: int = 1, end: int = 100) -> float:
         """
         Генерирует случайное число с плавающей запятой в указанном диапазоне.
 
@@ -109,7 +109,7 @@ class Fake:
 
         :return: Сумма от 1 до 1000.
         """
-        return self.float(1, 1000)
+        return self.float_num(1, 1000)
 
 
 fake = Fake(faker=Faker())
