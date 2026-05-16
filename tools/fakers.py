@@ -120,7 +120,7 @@ class Fake:
         :param value: Proto enum-класс для генерации значения.
         :return: Случайное значение из перечисления.
         """
-        return self.faker.random_element(value.value())
+        return self.faker.random_element(value.values())
 
 
 fake = Fake(faker=Faker())
