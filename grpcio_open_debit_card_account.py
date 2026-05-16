@@ -1,14 +1,15 @@
 import grpc
 
 from tools.fakers import fake
-from contracts.services.gateway.users.rpc_get_user_pb2 import GetUserRequest
 from contracts.services.gateway.users.users_gateway_service_pb2_grpc import UsersGatewayServiceStub
+from contracts.services.gateway.accounts.accounts_gateway_service_pb2_grpc import AccountsGatewayServiceStub
 from contracts.services.gateway.users.rpc_create_user_pb2 import CreateUserRequest, CreateUserResponse
+from contracts.services.gateway.accounts.rpc_open_debit_card_account_pb2 import OpenDebitCardAccountRequest, OpenDebitCardAccountResponse
 
 
 channel = grpc.insecure_channel('localhost:9003')
-
 user_gateway_service = UsersGatewayServiceStub(channel)
+accounts_gateway_service = AccountsGatewayServiceStub(channel)
 
 create_user_request = CreateUserRequest(
     email=fake.email(),
@@ -20,6 +21,10 @@ create_user_request = CreateUserRequest(
 create_user_response: CreateUserResponse = user_gateway_service.CreateUser(create_user_request)
 print('Create user response:', create_user_response)
 
-get_user_request = GetUserRequest(id=create_user_response.user.id)
-get_user_response = user_gateway_service.GetUser(get_user_request)
-print('Get user response:', get_user_response)
+open_debit_card_account_request = OpenDebitCardAccountRequest(user_id=create_user_response.user.id)
+open_debit_card_account_response: OpenDebitCardAccountResponse = accounts_gateway_service.OpenDebitCardAccount(
+    open_debit_card_account_request
+)
+print('Open debit card account response:', open_debit_card_account_response)
+
+
