@@ -26,5 +26,3 @@ open_debit_card_account_response: OpenDebitCardAccountResponse = accounts_gatewa
     open_debit_card_account_request
 )
 print('Open debit card account response:', open_debit_card_account_response)
-
-
