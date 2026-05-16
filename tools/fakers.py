@@ -83,7 +83,7 @@ class Fake:
 
         :return: Случайное отчество.
         """
-        return self.faker.middle_name()
+        return self.faker.first_name()
 
     def phone_number(self) -> str:
         """
