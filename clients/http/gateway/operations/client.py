@@ -122,16 +122,16 @@ class OperationsGatewayHTTPClient(HttpClient):
         )
 
     def get_operations(self, account_id: str) -> GetOperationsResponseSchema:
-        query = GetOperationsQuerySchema(accountId=account_id)
+        query = GetOperationsQuerySchema(account_id=account_id)
         response = self.get_operations_api(query)
         return GetOperationsResponseSchema.model_validate_json(response.text)
 
     def get_operations_summary(self, account_id: str) -> GetOperationsSummaryResponseSchema:
-        query = GetOperationsSummaryQuerySchema(accountId=account_id)
+        query = GetOperationsSummaryQuerySchema(account_id=account_id)
         response = self.get_operations_summary_api(query)
         return GetOperationsSummaryResponseSchema.model_validate_json(response.text)
 
-    def get_operation_receipt(self, operation_id) -> GetOperationReceiptResponseSchema:
+    def get_operation_receipt(self, operation_id: str) -> GetOperationReceiptResponseSchema:
         response = self.get_operation_receipt_api(operation_id)
         return GetOperationReceiptResponseSchema.model_validate_json(response.text)
 
