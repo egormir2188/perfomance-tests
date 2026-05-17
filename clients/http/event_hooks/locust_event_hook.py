@@ -34,7 +34,7 @@ def locust_response_event_hook(environment: Environment):
         request = response.request
         route = request.extensions.get("route", request.url.path)
         start_time = request.extensions.get("start_time", time.time())
-        response_time = time.time() - start_time * 1000
+        response_time = (time.time() - start_time) * 1000
         response_length = len(response.read())
 
         environment.events.request.fire(
@@ -42,9 +42,9 @@ def locust_response_event_hook(environment: Environment):
             context=None,
             response=response,
             exception=exception,
-            request_tyoe='HTTP',
+            request_type='HTTP',
             response_time=response_time,
-            response_lenght=response_length,
+            response_length=response_length,
         )
 
     return inner
