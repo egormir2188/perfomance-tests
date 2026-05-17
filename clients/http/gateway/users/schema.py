@@ -1,3 +1,5 @@
+import time
+
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
 
 from tools.fakers import fake

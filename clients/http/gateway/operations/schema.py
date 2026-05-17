@@ -56,17 +56,20 @@ class OperationsRequestBaseSchema(BaseModel):
     """
     Базовая структура данных для тела запроса.
     """
+    model_config = ConfigDict(populate_by_name=True)
+
     status: OperationStatus = Field(default_factory=lambda: fake.enum(OperationStatus))
     amount: float = Field(default_factory=fake.amount)
     card_id: str = Field(alias="cardId")
     account_id: str = Field(alias="accountId")
 
-class GetOperationsQuerySchema(OperationsQueryBaseSchema):
+class GetOperationsQuerySchema(BaseModel):
     """
     Структура данных для получения списка операций.
     """
     model_config = ConfigDict(populate_by_name=True)
-    pass
+
+    account_id: str = Field(alias="accountId")
 
 class GetOperationsResponseSchema(BaseModel):
     """
@@ -79,7 +82,8 @@ class GetOperationsSummaryQuerySchema(OperationsQueryBaseSchema):
     Структура данных для получения сводки по операциям.
     """
     model_config = ConfigDict(populate_by_name=True)
-    pass
+
+    account_id: str = Field(alias="accountId")
 
 class GetOperationsSummaryResponseSchema(BaseModel):
     """
