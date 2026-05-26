@@ -31,7 +31,7 @@ class LocustInterceptor(UnaryUnaryClientInterceptor):
 
         try:
             response = continuation(client_call_details, request)
-            response_length = response.result().byte_length
+            response_length = response.result().ByteSize()
         except RpcError as error:
             exception = error
 
