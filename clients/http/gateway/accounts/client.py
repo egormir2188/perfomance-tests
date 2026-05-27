@@ -69,23 +69,23 @@ class AccountsGatewayHTTPClient(HttpClient):
         response = self.get_accounts_api(query)
         return GetAccountsResponseSchema.model_validate_json(response.text)
 
-    def open_deposit_account(self, account_id: str) -> OpenDepositAccountResponseSchema:
-        request = OpenDepositAccountRequestSchema(user_id=account_id)
+    def open_deposit_account(self, user_id: str) -> OpenDepositAccountResponseSchema:
+        request = OpenDepositAccountRequestSchema(user_id=user_id)
         response = self.open_deposit_account_api(request)
         return OpenDepositAccountResponseSchema.model_validate_json(response.text)
 
-    def open_saving_account(self, account_id) -> OpenSavingsAccountResponseSchema:
-        request = OpenSavingsAccountRequestSchema(userId=account_id)
+    def open_savings_account(self, user_id) -> OpenSavingsAccountResponseSchema:
+        request = OpenSavingsAccountRequestSchema(userId=user_id)
         response = self.open_savings_account_api(request)
         return OpenSavingsAccountResponseSchema.model_validate_json(response.text)
 
-    def open_debit_card_account(self, account_id: str) -> OpenDebitCardAccountResponseSchema:
-        request = OpenDebitCardAccountRequestSchema(userId=account_id)
+    def open_debit_card_account(self, user_id: str) -> OpenDebitCardAccountResponseSchema:
+        request = OpenDebitCardAccountRequestSchema(userId=user_id)
         response = self.open_debit_card_account_api(request)
         return OpenDebitCardAccountResponseSchema.model_validate_json(response.text)
 
-    def open_credit_card_account(self, account_id) -> OpenCreditCardAccountResponseSchema:
-        request = OpenCreditCardAccountRequestSchema(userId=account_id)
+    def open_credit_card_account(self, user_id) -> OpenCreditCardAccountResponseSchema:
+        request = OpenCreditCardAccountRequestSchema(userId=user_id)
         response = self.open_credit_card_account_api(request)
         return OpenCreditCardAccountResponseSchema.model_validate_json(response.text)
 

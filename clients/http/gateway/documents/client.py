@@ -8,7 +8,7 @@ from clients.http.gateway.documents.schema import (
 )
 
 
-class GetTariffDocumentGatewayHTTPClient(HttpClient):
+class DocumentGatewayHTTPClient(HttpClient):
     """
     Клиент для взаимодействия с /api/v1/documents сервиса http-gateway.
     """
@@ -45,15 +45,15 @@ class GetTariffDocumentGatewayHTTPClient(HttpClient):
         return GetContractDocumentResponseSchema.model_validate_json(response.text)
 
 
-def build_documents_gateway_http_client() -> GetTariffDocumentGatewayHTTPClient:
+def build_documents_gateway_http_client() -> DocumentGatewayHTTPClient:
     """
     Функция создаёт экземпляр DocumentsGatewayHTTPClient с уже настроенным HTTP-клиентом.
 
     :return: Готовый к использованию DocumentsGatewayHTTPClient.
     """
-    return GetTariffDocumentGatewayHTTPClient(client=build_gateway_http_client())
+    return DocumentGatewayHTTPClient(client=build_gateway_http_client())
 
-def build_documents_gateway_locust_http_client(environment: Environment) -> GetTariffDocumentGatewayHTTPClient:
+def build_documents_gateway_locust_http_client(environment: Environment) -> DocumentGatewayHTTPClient:
     """
     Функция создаёт экземпляр GetTariffDocumentGatewayHTTPClient адаптированного под Locust.
 
@@ -63,4 +63,4 @@ def build_documents_gateway_locust_http_client(environment: Environment) -> GetT
     :param environment: объект окружения Locust.
     :return: экземпляр GetTariffDocumentGatewayHTTPClient с хуками сбора метрик.
     """
-    return GetTariffDocumentGatewayHTTPClient(client=build_gateway_locust_http_client(environment))
+    return DocumentGatewayHTTPClient(client=build_gateway_locust_http_client(environment))

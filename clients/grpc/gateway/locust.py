@@ -1,0 +1,61 @@
+from locust import TaskSet, SequentialTaskSet
+
+from clients.grpc.gateway.users.client import build_user_gateway_locust_grpc_client, UsersGatewayGRPCClient
+from clients.grpc.gateway.cards.client import build_cards_locust_gateway_grpc_client, CardsGatewayGRPCClient
+from clients.grpc.gateway.accounts.client import build_accounts_locust_gateway_grpc_client, AccountsGatewayGRPCClient
+from clients.grpc.gateway.documents.client import (
+    build_documents_locust_gateway_grpc_client,
+    DocumentsGatewayGRPCClient
+)
+from clients.grpc.gateway.operations.client import (
+    build_operations_locust_gateway_grpc_client,
+    OperationsGatewayGRPCClient
+)
+
+
+class GatewayGRPCTaskSet(TaskSet):
+    """
+    Базовый TaskSet для gRPC-сценариев, работающих с grpc-gateway.
+
+    Здесь создаются все необходимые API клиенты, которые будут доступны в последующих задачах (task).
+    Используется, если порядок выполнения задач внутри таск-сета не имеет значения.
+    """
+    users_gateway_client: UsersGatewayGRPCClient
+    accounts_gateway_client: AccountsGatewayGRPCClient
+    operations_gateway_client: OperationsGatewayGRPCClient
+    documents_gateway_client: DocumentsGatewayGRPCClient
+    cards_gateway_client: CardsGatewayGRPCClient
+
+    def on_start(self) -> None:
+        """
+        Метод вызывается перед запуском задач TaskSet.
+        Здесь создаются API клиенты с использованием контекста окружения Locust.
+        """
+        self.users_gateway_client = build_user_gateway_locust_grpc_client(self.user.environment)
+        self.accounts_gateway_client = build_accounts_locust_gateway_grpc_client(self.user.environment)
+        self.operations_gateway_client = build_operations_locust_gateway_grpc_client(self.user.environment)
+        self.documents_gateway_client = build_documents_locust_gateway_grpc_client(self.user.environment)
+        self.cards_gateway_client = build_cards_locust_gateway_grpc_client(self.user.environment)
+
+class GatewayGRPCSequentialTaskSet(SequentialTaskSet):
+    """
+    Базовый SequentialTaskSet для gRPC-сценариев, где важен порядок выполнения задач.
+
+    Задачи внутри такого таск-сета будут выполняться строго по очереди — сверху вниз.
+    Также здесь инициализируются те же API клиенты, что и в обычном TaskSet.
+    """
+    users_gateway_client: UsersGatewayGRPCClient
+    accounts_gateway_client: AccountsGatewayGRPCClient
+    operations_gateway_client: OperationsGatewayGRPCClient
+    documents_gateway_client: DocumentsGatewayGRPCClient
+    cards_gateway_client: CardsGatewayGRPCClient
+
+    def on_start(self) -> None:
+        """
+        Создание API клиентов для последовательного сценария.
+        """
+        self.users_gateway_client = build_user_gateway_locust_grpc_client(self.user.environment)
+        self.accounts_gateway_client = build_accounts_locust_gateway_grpc_client(self.user.environment)
+        self.operations_gateway_client = build_operations_locust_gateway_grpc_client(self.user.environment)
+        self.documents_gateway_client = build_documents_locust_gateway_grpc_client(self.user.environment)
+        self.cards_gateway_client = build_cards_locust_gateway_grpc_client(self.user.environment)
