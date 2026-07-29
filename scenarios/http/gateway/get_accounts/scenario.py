@@ -1,11 +1,11 @@
 from locust import task
 
 from tools.locust.user import LocustBaseUser
-from clients.http.gateway.locust import GatewayHTPPTaskSet
+from clients.http.gateway.locust import GatewayHTTPTaskSet
 from clients.http.gateway.users.schema import CreateUserResponseSchema
 
 
-class GetAccountsTaskSet(GatewayHTPPTaskSet):
+class GetAccountsTaskSet(GatewayHTTPTaskSet):
     """
     Нагрузочный сценарий, который последовательно:
     1. Создаёт нового пользователя.

@@ -1,12 +1,12 @@
 from locust import task
 
 from tools.locust.user import LocustBaseUser
-from clients.http.gateway.locust import GatewayHTPPSequentialTaskSet
+from clients.http.gateway.locust import GatewayHTTPSequentialTaskSet
 from clients.http.gateway.users.schema import CreateUserResponseSchema
 from clients.http.gateway.accounts.schema import OpenSavingsAccountResponseSchema
 
 
-class GetDocumentSequentialTaskSet(GatewayHTPPSequentialTaskSet):
+class GetDocumentSequentialTaskSet(GatewayHTTPSequentialTaskSet):
     """
     Нагрузочный сценарий, который последовательно:
     1. Создаёт нового пользователя.

@@ -13,7 +13,7 @@ from clients.http.gateway.operations.client import (
 )
 
 
-class GatewayHTPPTaskSet(TaskSet):
+class GatewayHTTPTaskSet(TaskSet):
     """
     Базовый TaskSet для HTTP-сценариев, работающих с http-gateway.
 
@@ -37,7 +37,7 @@ class GatewayHTPPTaskSet(TaskSet):
         self.documents_gateway_client = build_documents_gateway_locust_http_client(self.user.environment)
         self.cards_gateway_client = build_cards_gateway_locust_http_client(self.user.environment)
 
-class GatewayHTPPSequentialTaskSet(SequentialTaskSet):
+class GatewayHTTPSequentialTaskSet(SequentialTaskSet):
     """
     Базовый SequentialTaskSet для HTTP-сценариев, где важен порядок выполнения задач.
 
