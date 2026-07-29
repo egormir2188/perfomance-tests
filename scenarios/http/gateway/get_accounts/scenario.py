@@ -1,5 +1,6 @@
-from locust import User, between, task
+from locust import task
 
+from tools.locust.user import LocustBaseUser
 from clients.http.gateway.locust import GatewayHTPPTaskSet
 from clients.http.gateway.users.schema import CreateUserResponseSchema
 
@@ -47,10 +48,8 @@ class GetAccountsTaskSet(GatewayHTPPTaskSet):
 
         self.accounts_gateway_client.get_accounts(user_id=self.create_user_response.user.id)
 
-class GetAccountsUserScenario(User):
+class GetAccountsUserScenario(LocustBaseUser):
     """
     Пользователь Locust, исполняющий последовательный сценарий получения списка счетов.
     """
-    host = 'localhost'
     tasks = [GetAccountsTaskSet]
-    wait_time = between(1, 3)
