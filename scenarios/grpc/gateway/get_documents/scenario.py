@@ -53,7 +53,7 @@ class GetDocumentSequentialTaskSet(GatewayGRPCSequentialTaskSet):
             account_id = self.open_savings_account_response.account.id
         )
 
-class GetDocumentsScenarioUser(LocustBaseUser):
+class GetAccountsScenarioUser(LocustBaseUser):
     """
     Пользователь Locust, исполняющий последовательный сценарий получения документов.
     """

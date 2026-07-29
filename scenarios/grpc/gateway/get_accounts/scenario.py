@@ -49,7 +49,7 @@ class GetAccountsTaskSet(GatewayGRPCTaskSet):
         self.accounts_gateway_client.get_accounts(user_id=self.create_user_response.user.id)
 
 
-class GetAccountsUserScenario(LocustBaseUser):
+class GetAccountsScenarioUser(LocustBaseUser):
     """
     Пользователь Locust, исполняющий последовательный сценарий получения списка счетов.
     """
