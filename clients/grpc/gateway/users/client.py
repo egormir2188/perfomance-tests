@@ -1,3 +1,5 @@
+import time
+
 from grpc import Channel
 from locust.env import Environment
 
