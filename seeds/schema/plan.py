@@ -30,6 +30,8 @@ class SeedAccountsPlan(BaseModel):
         physical_cards (SeedCardsPlan): План по созданию физических карт на счётах.
         top_up_operations (SeedOperationsPlan): План по созданию операций пополнения.
         purchase_operations (SeedOperationsPlan): План по созданию операций покупки.
+        transfer_operations (SeedOperationsPlan): План по созданию операций перевода средств.
+        cash_withdrawal_operations (SeedOperationsPlan): План по созданию операций вывода наличных.
     """
     count: int = 0
     virtual_cards: SeedCardsPlan = Field(default_factory=SeedCardsPlan)
