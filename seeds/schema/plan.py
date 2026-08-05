@@ -36,6 +36,8 @@ class SeedAccountsPlan(BaseModel):
     physical_cards: SeedCardsPlan = Field(default_factory=SeedCardsPlan)
     top_up_operations: SeedOperationsPlan = Field(default_factory=SeedOperationsPlan)
     purchase_operations: SeedOperationsPlan = Field(default_factory=SeedOperationsPlan)
+    transfer_operations: SeedOperationsPlan = Field(default_factory=SeedOperationsPlan)
+    cash_withdrawal_operations: SeedOperationsPlan = Field(default_factory=SeedOperationsPlan)
 
 
 class SeedUsersPlan(BaseModel):
