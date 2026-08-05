@@ -54,8 +54,8 @@ class SeedUserResult(BaseModel):
     user_id: str
     deposit_accounts: list[SeedAccountResult] = Field(default_factory=list)
     savings_accounts: list[SeedAccountResult] = Field(default_factory=list)
-    debit_card_accounts: list[SeedCardResult] = Field(default_factory=list)
-    credit_card_accounts: list[SeedCardResult] = Field(default_factory=list)
+    debit_card_accounts: list[SeedAccountResult] = Field(default_factory=list)
+    credit_card_accounts: list[SeedAccountResult] = Field(default_factory=list)
 
 
 class SeedsResult(BaseModel):

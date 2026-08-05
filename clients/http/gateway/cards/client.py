@@ -9,7 +9,7 @@ from clients.http.gateway.cards.schema import (
 )
 
 
-class CardsGatewayHTTTPClient(HttpClient):
+class CardsGatewayHTTPClient(HttpClient):
     """
     Клиент для взаимодействия с /api/v1/cards/ сервиса http-gateway.
     """
@@ -41,15 +41,15 @@ class CardsGatewayHTTTPClient(HttpClient):
         return IssuePhysicalCardResponseSchema.model_validate_json(response.text)
 
 
-def build_cards_gateway_http_client() -> CardsGatewayHTTTPClient:
+def build_cards_gateway_http_client() -> CardsGatewayHTTPClient:
     """
     Функция создаёт экземпляр CardsGatewayHTTPClient с уже настроенным HTTP-клиентом.
 
     :return: Готовый к использованию CardsGatewayHTTPClient.
     """
-    return CardsGatewayHTTTPClient(client=build_gateway_http_client())
+    return CardsGatewayHTTPClient(client=build_gateway_http_client())
 
-def build_cards_gateway_locust_http_client(environment: Environment) -> CardsGatewayHTTTPClient:
+def build_cards_gateway_locust_http_client(environment: Environment) -> CardsGatewayHTTPClient:
     """
     Функция создаёт экземпляр CardsGatewayHTTPClient адаптированного под Locust.
 
@@ -59,4 +59,4 @@ def build_cards_gateway_locust_http_client(environment: Environment) -> CardsGat
     :param environment: объект окружения Locust.
     :return: экземпляр CardsGatewayHTTPClient с хуками сбора метрик.
     """
-    return CardsGatewayHTTTPClient(client=build_gateway_locust_http_client(environment))
+    return CardsGatewayHTTPClient(client=build_gateway_locust_http_client(environment))

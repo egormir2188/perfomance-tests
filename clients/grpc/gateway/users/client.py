@@ -71,7 +71,7 @@ class UsersGatewayGRPCClient(GRPCClient):
         return self.stub.CreateUser(request)
 
 
-def build_user_gateway_grpc_client() -> UsersGatewayGRPCClient:
+def build_users_gateway_grpc_client() -> UsersGatewayGRPCClient:
     """
     Фабрика для создания экземпляра UsersGatewayGRPCClient.
 
@@ -79,7 +79,7 @@ def build_user_gateway_grpc_client() -> UsersGatewayGRPCClient:
     """
     return UsersGatewayGRPCClient(channel=build_gateway_grpc_client())
 
-def build_user_gateway_locust_grpc_client(environment: Environment) -> UsersGatewayGRPCClient:
+def build_users_gateway_locust_grpc_client(environment: Environment) -> UsersGatewayGRPCClient:
     """
     Функция создаёт экземпляр UsersGatewayGRPCClient адаптированного под Locust.
 

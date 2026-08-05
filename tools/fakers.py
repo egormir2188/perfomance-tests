@@ -1,4 +1,4 @@
-import time
+from uuid import uuid4
 
 from faker import Faker
 from faker.providers.python import TEnum
@@ -27,12 +27,14 @@ class Fake:
 
     def email(self) -> str:
         """
-        Генерирует случайный email.
+        Генерирует гарантированно уникальный email.
 
-        Если не указан, будет использован случайный домен.
-        :return: Случайный email.
+        Faker берёт адреса из ограниченного пула, поэтому при массовом создании
+        пользователей неизбежны коллизии — как внутри одного прогона, так и с уже
+        существующими в базе записями. UUID в локальной части снимает этот вопрос.
+        :return: Уникальный email.
         """
-        return self.faker.email()
+        return f"{self.faker.user_name()}.{uuid4().hex}@example.com"
 
     def category(self):
         """

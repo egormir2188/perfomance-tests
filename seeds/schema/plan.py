@@ -32,8 +32,8 @@ class SeedAccountsPlan(BaseModel):
         purchase_operations (SeedOperationsPlan): План по созданию операций покупки.
     """
     count: int = 0
-    virtual_crds: SeedCardsPlan = Field(default_factory=SeedCardsPlan)
-    physical_crds: SeedCardsPlan = Field(default_factory=SeedCardsPlan)
+    virtual_cards: SeedCardsPlan = Field(default_factory=SeedCardsPlan)
+    physical_cards: SeedCardsPlan = Field(default_factory=SeedCardsPlan)
     top_up_operations: SeedOperationsPlan = Field(default_factory=SeedOperationsPlan)
     purchase_operations: SeedOperationsPlan = Field(default_factory=SeedOperationsPlan)
 

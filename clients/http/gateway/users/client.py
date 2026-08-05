@@ -52,7 +52,7 @@ class UsersGatewayHTTPClient(HttpClient):
         return CreateUserResponseSchema.model_validate_json(response.text)
 
 
-def build_user_gateway_http_client() -> UsersGatewayHTTPClient:
+def build_users_gateway_http_client() -> UsersGatewayHTTPClient:
     """
     Функция создаёт экземпляр UsersGatewayHTTPClient с уже настроенным HTTP-клиентом.
 
@@ -60,7 +60,7 @@ def build_user_gateway_http_client() -> UsersGatewayHTTPClient:
     """
     return UsersGatewayHTTPClient(client=build_gateway_http_client())
 
-def build_user_gateway_locust_http_client(environment: Environment) -> UsersGatewayHTTPClient:
+def build_users_gateway_locust_http_client(environment: Environment) -> UsersGatewayHTTPClient:
     """
     Функция создаёт экземпляр UsersGatewayHTTPClient адаптированного под Locust.
 
