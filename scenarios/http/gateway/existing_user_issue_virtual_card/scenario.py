@@ -4,43 +4,37 @@ from locust.env import Environment
 from tools.locust.user import LocustBaseUser
 from seeds.schema.result import SeedUserResult
 from clients.http.gateway.locust import GatewayHTTPTaskSet
-from seeds.scenarios.existing_user_get_documents import ExistingUserGetDocumentsSeedsScenario
+from seeds.scenarios.existing_user_issue_virtual_card import ExistingUserIssueVirtualCardSeedsScenario
 
 
 @events.init.add_listener
 def init(environment: Environment, **kwargs):
-    seeds_scenario = ExistingUserGetDocumentsSeedsScenario()
+    seeds_scenario = ExistingUserIssueVirtualCardSeedsScenario()
     seeds_scenario.build()
 
     environment.seeds = seeds_scenario.load()
 
 
-class ExistingUserGetDocumentsTaskSet(GatewayHTTPTaskSet):
+class ExistingUserIssueVirtualCardTaskSet(GatewayHTTPTaskSet):
     seed_user: SeedUserResult
 
     def on_start(self) -> None:
         super().on_start()
-        self.seed_user = self.user.environment.seeds.get_next_user()
+        self.seed_user = self.user.environment.seeds.get_random_user()
 
-    @task(1)
+    @task(2)
     def get_accounts(self):
         self.accounts_gateway_client.get_accounts(
             user_id=self.seed_user.user_id
         )
 
-    @task(2)
-    def get_tariff_document(self):
-        self.documents_gateway_client.get_tariff_document(
-            account_id=self.seed_user.savings_accounts[0].account_id
-        )
-
-    @task(2)
-    def get_contract_document(self):
-        self.documents_gateway_client.get_contract_document(
+    @task(1)
+    def issue_virtual_card(self):
+        self.cards_gateway_client.issue_virtual_card(
+            user_id=self.seed_user.user_id,
             account_id=self.seed_user.debit_card_accounts[0].account_id
         )
 
 
-class GetDocumentsScenarioUser(LocustBaseUser):
-    tasks = [ExistingUserGetDocumentsTaskSet]
-
+class IssueVirtualCarScenarioUser(LocustBaseUser):
+    tasks = [ExistingUserIssueVirtualCardTaskSet]
