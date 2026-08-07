@@ -32,7 +32,7 @@ class ExistingUserMakePurchaseTaskSet(GatewayHTTPTaskSet):
     @task(2)
     def get_accounts(self):
         self.accounts_gateway_client.get_accounts(
-            user_id=self.seed_user.credit_card_accounts[0].account_id
+            user_id=self.seed_user.user_id
         )
 
     @task(2)

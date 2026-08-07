@@ -16,6 +16,7 @@ class OperationType(StrEnum):
 class OperationStatus(StrEnum):
     FAILED = "FAILED"
     COMPLETED = "COMPLETED"
+    UNSPECIFIED = "UNSPECIFIED"
     IN_PROGRESS = "IN_PROGRESS"
 
 class OperationSchema(BaseModel):
