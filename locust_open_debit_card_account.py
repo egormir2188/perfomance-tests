@@ -1,7 +1,7 @@
 from locust import User, between, task
 
 from clients.http.gateway.users.schema import CreateUserResponseSchema
-from clients.http.gateway.users.client import UsersGatewayHTTPClient, build_user_gateway_locust_http_client
+from clients.http.gateway.users.client import UsersGatewayHTTPClient, build_users_gateway_locust_http_client
 from clients.http.gateway.accounts.client import build_accounts_gateway_locust_http_client, AccountsGatewayHTTPClient
 
 
@@ -13,7 +13,7 @@ class OpenDebitCardAccountScenarioUser(User):
     create_user_response: CreateUserResponseSchema
 
     def on_start(self) -> None:
-        self.users_gateway_client = build_user_gateway_locust_http_client(self.environment)
+        self.users_gateway_client = build_users_gateway_locust_http_client(self.environment)
         self.accounts_gateway_client = build_accounts_gateway_locust_http_client(self.environment)
         self.create_user_response = self.users_gateway_client.create_user()
 

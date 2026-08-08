@@ -1,6 +1,6 @@
 from locust import TaskSet, SequentialTaskSet
 
-from clients.grpc.gateway.users.client import build_user_gateway_locust_grpc_client, UsersGatewayGRPCClient
+from clients.grpc.gateway.users.client import build_users_gateway_locust_grpc_client, UsersGatewayGRPCClient
 from clients.grpc.gateway.cards.client import build_cards_locust_gateway_grpc_client, CardsGatewayGRPCClient
 from clients.grpc.gateway.accounts.client import build_accounts_locust_gateway_grpc_client, AccountsGatewayGRPCClient
 from clients.grpc.gateway.documents.client import (
@@ -31,7 +31,7 @@ class GatewayGRPCTaskSet(TaskSet):
         Метод вызывается перед запуском задач TaskSet.
         Здесь создаются API клиенты с использованием контекста окружения Locust.
         """
-        self.users_gateway_client = build_user_gateway_locust_grpc_client(self.user.environment)
+        self.users_gateway_client = build_users_gateway_locust_grpc_client(self.user.environment)
         self.accounts_gateway_client = build_accounts_locust_gateway_grpc_client(self.user.environment)
         self.operations_gateway_client = build_operations_locust_gateway_grpc_client(self.user.environment)
         self.documents_gateway_client = build_documents_locust_gateway_grpc_client(self.user.environment)
@@ -54,7 +54,7 @@ class GatewayGRPCSequentialTaskSet(SequentialTaskSet):
         """
         Создание API клиентов для последовательного сценария.
         """
-        self.users_gateway_client = build_user_gateway_locust_grpc_client(self.user.environment)
+        self.users_gateway_client = build_users_gateway_locust_grpc_client(self.user.environment)
         self.accounts_gateway_client = build_accounts_locust_gateway_grpc_client(self.user.environment)
         self.operations_gateway_client = build_operations_locust_gateway_grpc_client(self.user.environment)
         self.documents_gateway_client = build_documents_locust_gateway_grpc_client(self.user.environment)

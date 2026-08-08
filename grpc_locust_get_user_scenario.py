@@ -1,7 +1,7 @@
 from locust import User, between, task
 
 from contracts.services.gateway.users.rpc_create_user_pb2 import CreateUserResponse
-from clients.grpc.gateway.users.client import build_user_gateway_locust_grpc_client, UsersGatewayGRPCClient
+from clients.grpc.gateway.users.client import build_users_gateway_locust_grpc_client, UsersGatewayGRPCClient
 
 
 class GetUserScenarioUser(User):
@@ -11,7 +11,7 @@ class GetUserScenarioUser(User):
     create_user_response: CreateUserResponse
 
     def on_start(self) -> None:
-        self.users_gateway_client = build_user_gateway_locust_grpc_client(self.environment)
+        self.users_gateway_client = build_users_gateway_locust_grpc_client(self.environment)
         self.create_user_response = self.users_gateway_client.create_user()
 
     @task
